@@ -1,0 +1,21 @@
+package myfirstjdbc;
+
+import java.sql.*;
+
+public class MyFirstConnection {
+	public static void main(String[] args) {
+		String brukernavn = "marste";
+		String passord = "marste";
+		String url = "jdbc:mysql://mysql.nith.no/marste/";
+	
+		try {
+			Connection con = DriverManager.getConnection(
+					url,
+					brukernavn,
+					passord);	
+			System.out.println("This works!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

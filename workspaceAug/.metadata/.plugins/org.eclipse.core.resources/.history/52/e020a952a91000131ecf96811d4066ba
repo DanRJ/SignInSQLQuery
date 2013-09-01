@@ -1,0 +1,13 @@
+package myfirstjdbc;
+
+import java.sql.*;
+
+public class DatabaseClient {
+
+	public static void main(String[] args) {
+		String bruker = args[0], passord = args[1];
+		
+		
+	}
+
+}

@@ -1,0 +1,24 @@
+package db;
+
+import java.sql.*;
+
+public class ConnectToDB {
+	String bruker;
+	String passord;
+	String url;
+	
+	public ConnectToDB(String bruker, String passord, String url) {
+		this.bruker = bruker;
+		this.passord = passord;
+		this.url = url;
+	}
+
+	public void closeConnection() {
+		
+	}
+	
+	public Connection getConnection() {
+		return null;
+	}
+	
+}

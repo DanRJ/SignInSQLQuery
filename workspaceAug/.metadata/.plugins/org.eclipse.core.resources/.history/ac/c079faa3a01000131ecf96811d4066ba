@@ -1,0 +1,20 @@
+package jdbc;
+
+import java.sql.DriverManager;
+import java.sql.Connection;
+
+public class Connection {
+		public static void main(String[] args) {
+			String brukernavn = args[0];
+			String passord = args[1];
+			MyFirstConnection con;
+			try {
+				 con = DriverManager.getConnection(
+						"jdbc:mysql://mysql.nith.no/johdan12",
+						brukernavn,
+						passord);	
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+}

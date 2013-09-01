@@ -1,0 +1,27 @@
+package db;
+
+import java.sql.*;
+
+public class ConnectToDB {
+
+	public ConnectToDB(String bruker, String passord, String url) {
+		try {
+			Connection con = DriverManager.getConnection(
+					url,
+					bruker,
+					passord);	
+			System.out.println("This works!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void closeConnection() {
+		
+	}
+	
+	public Connection getConnection() {
+		return null;
+	}
+	
+}

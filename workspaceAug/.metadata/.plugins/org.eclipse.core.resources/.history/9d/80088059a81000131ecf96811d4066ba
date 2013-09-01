@@ -1,0 +1,19 @@
+package myfirstjdbc;
+
+import java.sql.*;
+
+public class ConnectToDB {
+
+	public ConnectToDB(String bruker, String passord) {
+		
+	}
+
+	public void closeConnection() {
+		
+	}
+	
+	public Connection getConnection() {
+		
+	}
+	
+}
