@@ -6,60 +6,36 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class GUISQL extends JFrame {
-	public enum LoginState {
-		LOGIN, BAD_LOGIN, LOGIN_CHECK, GOOD_LOGIN, SQL_VIEW
-	}
 
 	private static final long serialVersionUID = 1L;
 
-	public LoginState stateLogin;
 	private String query, server, username, password;
-	private JPanel jpPanel, jpLogin;
+	private JPanel jpLogin;
 	private JTextArea jtaText, jtaConsole;
 	private JButton jbSubmit;
 	private JTextField jtfServer, jtfUsername, jtfPassword;
 	private JLabel jlServer, jlUsername, jlPassword;
 	private JFrame jfWindowSignIn, jfSQL;
-
+	private CRUDexample inUsername;
+	
 	public GUISQL() {
-		stateLogin = LoginState.LOGIN;
-		checkStatus();
+		
 	}
-
-	public void checkStatus() {
-		switch (stateLogin) {
-		case LOGIN:
-			System.out.println(stateLogin);
+	public GUISQL(boolean whichWindow) {
+		if (!whichWindow) {
 			login();
-			break;
-		case BAD_LOGIN:
-			System.err.println("BADLOGIN");
-			break;
-		case LOGIN_CHECK:
-			System.out.println("hello");
-			setServer(jtfServer.getText());
-			setUsername(jtfUsername.getText());
-			setPassword(jtfPassword.getText());
-			break;
-		case GOOD_LOGIN:
-			break;
-		case SQL_VIEW:
+		}else {
+			disposeWindow();
 			textArea();
-			System.out.println("SQL");
-			break;
 		}
 	}
 
-	public void textArea() {
-		
+	public void textArea() {	
 		jfSQL = new JFrame();
 		jtaText = new JTextArea();
 		
 		jtaConsole = new JTextArea();
 		jtaConsole.setEditable(false);
-		
-		jfSQL.add(jtaConsole, BorderLayout.SOUTH);
-		jfSQL.add(jtaText, BorderLayout.CENTER);
 		
 		jfSQL.setSize(800, 400);
 		jfSQL.setLocationRelativeTo(null);
@@ -74,12 +50,9 @@ public class GUISQL extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_F5) {
 					setQuery(jtaText.getText());
-					System.out.println("asdasd");
 				}
-				if (e.getKeyCode() == KeyEvent.VK_F4) {
-					stateLogin = LoginState.LOGIN;
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					jfSQL.dispose();
-					checkStatus();
 				}
 			}
 
@@ -91,12 +64,15 @@ public class GUISQL extends JFrame {
 			public void keyTyped(KeyEvent e) {
 			}
 		});
+		jfSQL.add(jtaConsole, BorderLayout.SOUTH);
+		jfSQL.add(jtaText, BorderLayout.CENTER);
+		
 	}
 
 	public void login() {
 		jfWindowSignIn = new JFrame();
 		jbSubmit = new JButton("Sign in");
-
+		
 		jtfServer = new JTextField(15);
 		jlServer = new JLabel("Server:");
 
@@ -117,27 +93,32 @@ public class GUISQL extends JFrame {
 		jpLogin.add(jlPassword);
 		jpLogin.add(jtfPassword);
 
-		jfWindowSignIn.add(jbSubmit, BorderLayout.SOUTH);
-		jfWindowSignIn.add(jpLogin, BorderLayout.CENTER);
 		jfWindowSignIn.setSize(400, 110);
 		jfWindowSignIn.setLocationRelativeTo(null);
 		jfWindowSignIn.setVisible(true);
 		jfWindowSignIn.setTitle("Login Form");
 		jfWindowSignIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jfWindowSignIn.setResizable(false);
-
-		jbSubmit = new JButton("Sign in");
-		jbSubmit.addActionListener(new ActionListener() {
 		
+		jbSubmit = new JButton("Sign in");
+		jbSubmit.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "pressed");
+		jbSubmit.getInputMap().put(KeyStroke.getKeyStroke("released ENTER"), "released");
+		jbSubmit.addActionListener(new ActionListener() {
+				
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				stateLogin = LoginState.LOGIN_CHECK;
-				checkStatus();
+				setUsername(jtfUsername.getText());
+				setPassword(jtfPassword.getText());
+				inUsername = new CRUDexample(jtfUsername.getText(), jtfPassword.getText());
 			}
 		});
-		
+		jfWindowSignIn.add(jbSubmit, BorderLayout.SOUTH);
+		jfWindowSignIn.add(jpLogin, BorderLayout.CENTER);
 	}
 
+	public void disposeWindow() {
+		jfWindowSignIn.dispose();
+	}
 	// QUERY GET/SET
 	public void setQuery(String in) {
 		query = in;
