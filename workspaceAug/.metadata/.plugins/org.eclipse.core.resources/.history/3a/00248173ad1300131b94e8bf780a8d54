@@ -1,0 +1,7 @@
+package myfirstjdbc;
+
+public interface IStatus {
+	void enum LoginState {
+		LOGIN, BAD_LOGIN, LOGIN_CHECK, GOOD_LOGIN, SQL_VIEW
+	}
+}

@@ -7,6 +7,5 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="myfirstjdbc.CRUDexample"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="root Drj010288"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="AJavaProgrammering"/>
 </launchConfiguration>

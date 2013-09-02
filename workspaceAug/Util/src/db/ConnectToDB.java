@@ -22,9 +22,10 @@ public class ConnectToDB {
 	
 	public Connection getConnection() throws SQLException{
 		con = DriverManager.getConnection(
-				"jdbc:mysql://localhost/test",
+				"jdbc:mysql://localhost/",
 				bruker,
 				passord);	
+		
 		System.out.println("This works!");
 		return con;		
 	}
