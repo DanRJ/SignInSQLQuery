@@ -1,5 +1,0 @@
-package myfirstjdbc;
-
-public interface IStatus {
-	
-}
